@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{%block title%}{%endblock%}</title>
+</head>
+<body>
+
+    <head>
+        <nav>
+            <ul>
+                <li><a href="{% url '' %}">Home</a></li>
+                <li><a href="{% url 'login' %}">Login</a></li>
+                <li><a href="{% url 'cadastro_usuario' %}">Criar Conta</a></li>
+                <li><a href="{% url 'cadastro_carros' %}">Cadastrar Carro</a></li>
+                <li><a href="{% url 'sair' %}">Sair</a></li>
+                
+            </ul>
+        </nav>
+    </head>
+
+<main>
+    {%block content%}
+
+    {%endblock%}
+</main>
+</body>
+</html>
