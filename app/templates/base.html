@@ -9,14 +9,23 @@
 
     <head>
         <nav>
-            <ul>
-                <li><a href="{% url '' %}">Home</a></li>
-                <li><a href="{% url 'login' %}">Login</a></li>
-                <li><a href="{% url 'cadastro_usuario' %}">Criar Conta</a></li>
+            {% if user.is_authenticated %}
+            <lu>
+                <li>Olá, {{ user.username }}</li>
                 <li><a href="{% url 'cadastro_carros' %}">Cadastrar Carro</a></li>
                 <li><a href="{% url 'sair' %}">Sair</a></li>
-                
+            </lu>
+            {% endif %}
+            <lu>
+                <li><a href="{% url '' %}">Home</a></li>
+            </lu>
+
+            {% if not user.is_authenticated %}
+            <ul>
+                <li><a href="{% url 'login' %}">Login</a></li>
+                <li><a href="{% url 'cadastro_usuario' %}">Criar Conta</a></li>
             </ul>
+            {% endif %}
         </nav>
     </head>
 

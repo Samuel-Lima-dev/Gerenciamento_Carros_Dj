@@ -1,36 +1,45 @@
-from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from .models import Car_model
 from .forms import New_Car_Form
+from django.views import View
+from django.views.generic import ListView
 
 
 
-def home_view(request):
+class HomeView(View):
 
-    carros = Car_model.objects.all().order_by('modelo')
-    busca = request.GET.get('busca')
+    def get(self, request):
+        carros = Car_model.objects.all().order_by('modelo')
+        busca = request.GET.get('busca')
 
-    if busca:
-        carros = Car_model.objects.filter(modelo__icontains = busca)
+        if busca:
+            carros = Car_model.objects.filter(modelo__icontains = busca)
+
+        return render(
+            request,
+            'homepage.html',
+            {'carros': carros}
+        )
     
-    return render(
-        request,
-        'homepage.html',
-        {'carros': carros}
-    )
 
-def new_car_view (request):
-    
-    if request.method == 'POST':
-        new_car_form = New_Car_Form(request.POST, request.FILES)
-        if new_car_form.is_valid():
-            new_car_form.save()
+class NewCarView(View):
+
+    def get(self, request):
+        new_car = New_Car_Form()
+        return render(
+            request,
+            'new_car.html',
+            {'form': new_car}
+        )
+
+    def post(self, request):
+        new_car = New_Car_Form(request.POST, request.FILES)
+        if new_car.is_valid():
+            new_car.save()
             return redirect('')
-    else:
-        new_car_form = New_Car_Form()
+        return render(
+            request,
+            'new_car.html',
+            {'form': new_car }
+        )
 
-    return render(
-        request,
-        'new_car.html',
-        {'form': new_car_form}
-    )

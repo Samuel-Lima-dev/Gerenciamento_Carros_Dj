@@ -12,7 +12,7 @@
 
             {% for carros in carros %}
                 <img src="{{carros.imagem.url}}">
-                <h2>{{carros}}</h2>
+                <h2>{{carros.marca}} {{carros}}</h2>
                 <h4>Ano:{{carros.ano}} Valor:{{carros.valor}}</h4>
 
             {% endfor %}
