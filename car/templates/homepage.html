@@ -1,7 +1,11 @@
 {%extends "base.html"%}
+
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'css/style.css'%}">
     {% block content %}
 
-        <form method="get">
+        <form method="get" class="form">
 
             <input type="text" name="busca" placeholder="Buscar Carro">
             <input type="submit">
@@ -11,10 +15,13 @@
         {%if carros%}
 
             {% for carros in carros %}
-                <img src="{{carros.imagem.url}}">
-                <h2>{{carros.marca}} {{carros}}</h2>
-                <h4>Ano:{{carros.ano}} Valor:{{carros.valor}}</h4>
-
+                
+                <div><a href="{% url 'detalhes' carros.pk%}">
+                    <img src="{{carros.imagem.url}}">
+                    <h2>{{carros.marca}} {{carros}}</h2>
+                    <h4>Ano:{{carros.ano}} Valor:{{carros.valor}}</h4>
+                
+                </a></div>
             {% endfor %}
 
 

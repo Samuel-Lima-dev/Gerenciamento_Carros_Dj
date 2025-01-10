@@ -1,0 +1,18 @@
+{%extends "base.html"%}
+
+{%block content%}
+
+<div>
+    <img src="{{ object.imagem.url }}" >
+    <h1>{{object.marca}} {{object.modelo}}</h1>
+</div>
+
+{%if user.is_authenticated%}
+    <div>
+        <a href="{% url 'update' pk=object.pk %}">Editar</a>
+        <a href="{% url 'delete' pk=object.pk %}">Deletar</a>
+    </div>
+{%endif%}
+
+
+{%endblock%}
